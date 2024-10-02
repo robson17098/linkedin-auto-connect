@@ -1,0 +1,42 @@
+// 1. Load https://www.linkedin.com/mynetwork/
+// 2. Ensure your LinkedIn is set to English.
+// 3. Paste this script in the Chrome DevTools at your own risk.
+
+function clickConnectButtons() {
+    // Select all buttons with the text "Invite"
+    const connectButtons = Array.from(document.querySelectorAll('button[aria-label^="Invite"]'));
+
+    // Helper function to click each button with a random delay
+    function clickButtonWithDelay(button) {
+        const randomDelay = Math.floor(Math.random() * 2000) + 500; // Delay between 500ms and 2500ms
+        setTimeout(() => {
+            console.log(`Clicking the button: ${button.ariaLabel}`);
+            button.click();
+        }, randomDelay);
+    }
+
+    // Click each button found with a random delay
+    connectButtons.forEach(button => {
+        clickButtonWithDelay(button);
+    });
+}
+
+// Function to scroll the page down more aggressively
+function scrollDown() {
+    // Scroll down the page a greater distance
+    window.scrollBy(0, window.innerHeight * 2); // Scroll down two viewport heights
+}
+
+// Main function to execute the script
+function main() {
+    clickConnectButtons();
+
+    // Scroll down and try to click the "Connect" buttons again
+    scrollDown();
+    setTimeout(() => {
+        clickConnectButtons();
+    }, Math.floor(Math.random() * 2000) + 1000); // Wait a random interval between 1000ms and 3000ms before trying to click again
+}
+
+// Call the main function
+main();
